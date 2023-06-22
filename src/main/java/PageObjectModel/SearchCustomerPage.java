@@ -37,7 +37,7 @@ public  class SearchCustomerPage
     @CacheLookup
     WebElement Lastname;
 
-     @FindBy(xpath ="//button[@id=\"search-customers\"]")
+     @FindBy(xpath ="//button[@class='btn btn-primary btn-search']//following::i[@class='fas fa-search']")
       @CacheLookup
     WebElement searchbtn;
 
@@ -107,7 +107,7 @@ public  class SearchCustomerPage
 
         for(int i=1;i<=getNoOfRows();i++)
         {
-            //taking hard coded value because we are checking table data from second column
+            //taking hard coded value because we are checking table data and taking email id from second column
             String emailid=table.findElement(By.xpath("//table[@id='customers-grid']//tbody//tr["+i+"]//td[2]")).getText();
             System.out.println(emailid);
 
@@ -123,7 +123,26 @@ public  class SearchCustomerPage
         return  flag;
     }
 
+    public boolean searchCustomerByName(String Name)
+    {
+        boolean flag=false;
 
+        for(int i=1;i<=getNoOfRows();i++)
+        {
+            //taking hard coded value because we are checking table data and taking name from third column
+            String name=table.findElement(By.xpath("//table[@id='customers-grid']//tbody//tr["+i+"]//td[3]")).getText();
+            System.out.println(name);
+
+            //For seperating first name and last name
+           String names[]=name.split(" ");
+           
+           if(names[0].equals("Victoria") && names[1].equals("Terces"))
+           {
+        	   flag=true;
+           }
+        }
+        return  flag;
+    }
 
 
 

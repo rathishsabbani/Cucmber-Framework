@@ -30,6 +30,7 @@ public class AddCustomerPage
    By GFemale=By.id("Gender_Female");
     By Calendar=By.xpath("//span[@class='k-icon k-i-calendar']");
     By selectingdate=By.xpath("//tr//td//a[@title='Saturday, October 29, 2022']");
+    By Manualdate=By.xpath("//label[contains(text(),\"Date of birth\")]//following::input[1]");
     By companyname=By.name("Company");
     By taxexempt=By.id("IsTaxExempt");
     By Deleting_Customerroles=By.xpath("//span[@class='k-select' and @title='delete']");
@@ -102,6 +103,11 @@ public class AddCustomerPage
        ldriver.findElement(selectingdate).click();
    }
 
+   public void manualdate()
+   {
+	   ldriver.findElement(Manualdate).sendKeys("08/05/195");
+   }
+   
    public void companyname(String name)
    {
        ldriver.findElement(companyname).sendKeys(name);

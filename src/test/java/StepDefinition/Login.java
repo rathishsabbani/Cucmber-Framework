@@ -3,30 +3,37 @@ package StepDefinition;
 import PageObjectModel.AddCustomerPage;
 import PageObjectModel.LoginPage;
 import PageObjectModel.SearchCustomerPage;
-import io.cucumber.java.Before;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.LogManager;
 
 public class Login extends BaseClass {
 
-    @Before
+	
+//    @Before
     public void setup() throws IOException, InterruptedException {
 
         //For getting logs adding log properties class to our class
         logger= Logger.getLogger("nopCommerce");
-        PropertyConfigurator.configure("Log4j.properties");
+        System.out.println("hi");
+        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\"+"log4j.properties");
 
         //Reading properties
         configprop=new Properties();
@@ -37,23 +44,26 @@ public class Login extends BaseClass {
 
         Thread.sleep(5000);
         String browser=configprop.getProperty("browser");
+        System.out.println(browser);
         if(browser.equals("chrome")) {
-            System.setProperty("webdriver.chrome.driver", configprop.getProperty("chromepath"));
+        	WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         }
         else if(browser.equals("firefox"))
         {
-           System.setProperty("webdriver.gecko.driver",configprop.getProperty("firefoxpath"));
+          WebDriverManager.firefoxdriver().setup();
             driver= new FirefoxDriver();
         }
         logger.info("-------------- Launching Browser----------------");
-
+        
+        System.out.println("setup completed");
     }
     @Given("User Launch Chrome browser")
-    public void user_launch_chrome_browser() throws  IOException {
+    public void user_launch_chrome_browser() throws  IOException, InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver","E:\\CucumberFromScratch\\chromedriver.exe");
-        driver=new ChromeDriver();
+//        WebDriverManager.chromedriver().setup();
+//        driver=new ChromeDriver();
+    	setup();
     lp = new LoginPage(driver);
 
     }
@@ -67,11 +77,12 @@ public class Login extends BaseClass {
         driver.manage().window().maximize();
     }
 
-    @And("User enters Email as {string} and Password as {string}")
-    public void userEntersEmailAsAndPasswordAs(String email, String password) {
-        logger.info("-------------- providing login details----------------");
-        lp.setUserName(email);
-        lp.setPassword(password);
+    
+    @When("User enters Email as {string}  and Password as {string}")
+    public void user_enters_email_as_and_password_as(String string, String string2) {
+    	 logger.info("-------------- providing login details----------------");
+         lp.setUserName(string);
+         lp.setPassword(string2);
     }
 
     @When("Click on Login")
@@ -155,8 +166,9 @@ public class Login extends BaseClass {
         AdCuP.setGender("Male");
         AdCuP.setFirstName("Mukesh");
         AdCuP.setLastName("Smart");
-        AdCuP.calendar();
-        AdCuP.selectingdate();
+//        AdCuP.calendar();
+//        AdCuP.selectingdate();
+        AdCuP.manualdate();
         AdCuP.companyname("BusyQA");
         AdCuP.taxexempt();
         // AdCuP.delete_customerroles();
@@ -199,7 +211,7 @@ public class Login extends BaseClass {
 
     @Then("User should found Email in the Search table")
     public void user_should_found_email_in_the_search_table() {
-        //searching by using search customer method
+        //searching by using search customer email method
         boolean status = searchcustomer.searchCustomerByEmail("victoria_victoria@nopCommerce.com");
 
         Assert.assertEquals(true, status);
@@ -220,7 +232,14 @@ public class Login extends BaseClass {
         searchcustomer = new SearchCustomerPage(driver);
         searchcustomer.LastName("Terces");
     }
+    
 
+    @Then("User should found Name in the Search table")
+    public void user_should_found_name_in_the_search_table() {
+       //searching by using search customer name method
+    	boolean status=searchcustomer.searchCustomerByName("Victoria Terces");
+    	Assert.assertEquals(true, status);
+    }
 
 
 
