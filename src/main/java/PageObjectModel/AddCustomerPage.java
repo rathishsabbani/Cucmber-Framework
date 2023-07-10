@@ -21,7 +21,7 @@ public class AddCustomerPage
     By Customer=By.xpath("//a[@href='/Admin/Customer/List']//p[text()=' Customers']");
 
    //clicking on Add new user
-    By Addnewbtn=By.xpath("//a[@class='btn btn-primary']");
+   By Addnewbtn=By.xpath("//a[@class='btn btn-primary']");
     By Email=By.id("Email");
     By Password=By.id("Password");
     By Firstname=By.id("FirstName");

@@ -18,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 
+import GenericLibraries.BaseClass;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,18 +28,19 @@ import java.util.logging.LogManager;
 public class Login extends BaseClass {
 
 	
-//    @Before
+ //  @Before()
     public void setup() throws IOException, InterruptedException {
 
-        //For getting logs adding log properties class to our class
-        logger= Logger.getLogger("nopCommerce");
-        System.out.println("hi");
-        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\"+"log4j.properties");
-
-        //Reading properties
+               //Reading properties
         configprop=new Properties();
         FileInputStream configpropfile= new FileInputStream("config.properties");
         configprop.load(configpropfile);
+        
+        //For getting logs adding log properties class to our class
+       logger= Logger.getLogger("nopCommerce");
+        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\"+"log4j.properties");
+
+
 
         //Getting the properties from config.properties
 
@@ -61,29 +63,32 @@ public class Login extends BaseClass {
     @Given("User Launch Chrome browser")
     public void user_launch_chrome_browser() throws  IOException, InterruptedException {
 
-//        WebDriverManager.chromedriver().setup();
-//        driver=new ChromeDriver();
+//       //before annotation was not working so just calling the driver here
     	setup();
     lp = new LoginPage(driver);
 
     }
 
-    @When("User opens URL {string}")
-    public void userOpensURL(String url)
+    
+   
+    @Given("User enters URL {string}")
+    public void user_enters_url(String url)
     {
-
-        logger.info("-------------- Entering URL----------------");
-        driver.get(url);
-        driver.manage().window().maximize();
+    	 logger.info("-------------- Entering URL----------------");
+         driver.get(url);
+         driver.manage().window().maximize();
     }
 
+   
     
     @When("User enters Email as {string}  and Password as {string}")
-    public void user_enters_email_as_and_password_as(String string, String string2) {
-    	 logger.info("-------------- providing login details----------------");
-         lp.setUserName(string);
-         lp.setPassword(string2);
+    public void user_enters_email_as_and_password_as(String string1, String string2)
+    {
+    	logger.info("-------------- providing login details----------------");
+        lp.setUserName(string1);
+        lp.setPassword(string2); 	
     }
+
 
     @When("Click on Login")
     public void click_on_login() {
@@ -126,7 +131,7 @@ public class Login extends BaseClass {
     }
 
 
-    //Adding customer stepdefinitions here only
+    //1.Adding customer stepdefinitions here only for remaining feature files
 
 
     @Then("User can view Dashboard")
@@ -192,7 +197,7 @@ public class Login extends BaseClass {
                 .contains("The new customer has been added successfully"));
     }
 
-    //verifying with customer mail id and name-------------------------------
+    //2.verifying with customer mail id and name-------------------------------
 
 
     @When("Enter customer Email")

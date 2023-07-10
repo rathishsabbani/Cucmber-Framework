@@ -2,8 +2,8 @@ Feature: Customers
 
   Background: Below are common steps for every scenario
     Given User Launch Chrome browser
-    When User opens URL "http://admin-demo.nopcommerce.com/login"
-    And User enters Email as "admin@yourstore.com"  and Password as "admin"
+    And User enters URL "http://admin-demo.nopcommerce.com/login"
+    When User enters Email as "admin@yourstore.com"  and Password as "admin"
     And Click on Login
     Then User can view Dashboard
 
@@ -28,7 +28,7 @@ Feature: Customers
     Then User should found Name in the Search table
     And close browser
 
-  @Regression
+  @Smoke
   Scenario Outline: Search Customer by Email
     When User click on customers Menu
     And click on customers Menu Item
@@ -36,5 +36,3 @@ Feature: Customers
     When Click on search button
     Then User should found Email in the Search table
     And close browser
-
-   

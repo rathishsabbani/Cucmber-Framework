@@ -1,11 +1,12 @@
-package StepDefinition;
+package GenericLibraries;
+
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 
 import PageObjectModel.AddCustomerPage;
 import PageObjectModel.LoginPage;
 import PageObjectModel.SearchCustomerPage;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
 
@@ -16,7 +17,7 @@ public class BaseClass
      public LoginPage lp;
      public AddCustomerPage AdCuP;
      public SearchCustomerPage searchcustomer;
-     public  static Logger logger;
+     public   Logger logger;
 
     public Properties configprop;
      //created for generating string for unique email id

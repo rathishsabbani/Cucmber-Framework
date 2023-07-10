@@ -7,12 +7,11 @@ import io.cucumber.junit.Cucumber;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="E:\\CucumberFromScratch\\Features\\Customers.feature",
+@CucumberOptions(features="E:\\CucumberFromScratch\\Features\\Login.feature",
                  glue={"StepDefinition"},
                  dryRun=false, 
                  monochrome = true, 
-                 plugin={"pretty","html:test-output.html"},
-                 tags = "@sanity"
+                 plugin={"pretty","html:test-output.html"}
                  )
 
 
