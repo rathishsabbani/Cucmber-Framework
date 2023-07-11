@@ -140,6 +140,7 @@ public  class SearchCustomerPage
            if(names[0].equals("Victoria") && names[1].equals("Terces"))
            {
         	   flag=true;
+        	   break;
            }
         }
         return  flag;

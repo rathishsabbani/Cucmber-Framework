@@ -1,6 +1,6 @@
 Feature: Login
 
-  Scenario Outline: Search Customer by Email
+  Scenario Outline: Login and logout operations
     Given User Launch Chrome browser
     And User enters URL "http://admin-demo.nopcommerce.com/login"
     When User enters Email as "admin@yourstore.com" and Password as "admin"

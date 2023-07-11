@@ -7,7 +7,7 @@ import io.cucumber.junit.Cucumber;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="E:\\CucumberFromScratch\\Features\\Login.feature",
+@CucumberOptions(features="C:\\Users\\ABC\\eclipse-workspace\\Cucumber-Scratch\\Features\\Login.feature",
                  glue={"StepDefinition"},
                  dryRun=false, 
                  monochrome = true, 
